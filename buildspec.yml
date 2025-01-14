@@ -14,23 +14,22 @@ phases:
 
       - echo "Logging in to Amazon ECR..."
       - aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 559050234647.dkr.ecr.eu-north-1.amazonaws.com
-      
+
       - echo "Building the Docker image..."
       - docker build -t first-time .
-      
+
       - docker tag first-time:latest 559050234647.dkr.ecr.eu-north-1.amazonaws.com/first-time:latest
       - echo "Pushing the Docker image to ECR..."
       - docker push 559050234647.dkr.ecr.eu-north-1.amazonaws.com/first-time:latest
 
-      - | 
-        echo '[
+      - |
+        echo '[ 
         {
-          "name": "newcontainer",
+          "name": "newcontainer", 
           "imageUri": "559050234647.dkr.ecr.eu-north-1.amazonaws.com/first-time:latest"
-          }
-        ]' >imagedefinitions.json
+        }
+        ]' > imagedefinitions.json
 
 artifacts:
   files:
     - imagedefinitions.json
->>>>>>> 1c321ace5cf2ba71cea9bb71106267d5cf0c6755
