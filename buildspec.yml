@@ -1,35 +1,7 @@
-version: 0.2
-
-phases:
-  install:
-    commands:
-      - echo "Installing dependencies..."
-  pre_build:
-    commands:
-
-  build:
-    commands:
-      - apt-get update -y
-      - apt-get install -y docker.io
-
-      - echo "Logging in to Amazon ECR..."
-      - aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 559050234647.dkr.ecr.eu-north-1.amazonaws.com
-      
-      - echo "Building the Docker image..."
-      - docker build -t first-time .
-      
-      - docker tag doc:latest 559050234647.dkr.ecr.eu-north-1.amazonaws.com/first-time:latest
-      - echo "Pushing the Docker image to ECR..."
-      - docker push 559050234647.dkr.ecr.eu-north-1.amazonaws.com/first-time:latest
-
-      - | 
-        echo '[
-        {
-          "name": "newcontainer",
-          "imageUri": "559050234647.dkr.ecr.eu-north-1.amazonaws.com/first-time:latest"
-          }
-        ]' >imagedefinitions.json
-
-artifacts:
-  files:
-    - imagedefinitions.json
+[Container] 2025/01/14 11:18:38.726455 Running on CodeBuild On-demand
+[Container] 2025/01/14 11:18:38.726467 Waiting for agent ping
+[Container] 2025/01/14 11:18:38.928076 Waiting for DOWNLOAD_SOURCE
+[Container] 2025/01/14 11:18:40.094158 Phase is DOWNLOAD_SOURCE
+[Container] 2025/01/14 11:18:40.134280 CODEBUILD_SRC_DIR=/codebuild/output/src1725974008/src
+[Container] 2025/01/14 11:18:40.140212 Phase complete: DOWNLOAD_SOURCE State: FAILED
+[Container] 2025/01/14 11:18:40.140228 Phase context status code: YAML_FILE_ERROR Message: stat /codebuild/output/src1725974008/src/buildspec: no such file or directory
